@@ -29,6 +29,12 @@ O **CravilSocial** é uma plataforma corporativa unificada de rede social e comu
 
 ---
 
+## 📸 Demonstração Visual (UI / UX)
+
+| Interface de Conversas & Grupos | Feed Corporativo & Anexos |
+| :---: | :---: |
+| ![Interface de Chat](CravilSocial_Chat.png) | ![Feed Corporativo](CravilSocial_Feed.png) |
+
 ## 🏗️ Arquitetura de Software & Diagrama do Sistema
 
 O backend foi estruturado sob os princípios da **Arquitetura Hexagonal Modular (Ports & Adapters)**, garantindo desacoplamento total entre as regras de negócio centrais, os meios de transporte (REST / WebSockets) e os adaptadores de infraestrutura (Prisma ORM, S3/Cloudflare R2, JWT).
