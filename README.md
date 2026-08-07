@@ -1,7 +1,7 @@
-# 💬 CravilSocial — Enterprise Real-Time Communication & Social Platform
+# 💬 Social Business — Enterprise Real-Time Communication & Social Platform
 
-> **📌 Showcase / Case Study Técnico**  
-> Este repositório é uma demonstração de arquitetura e estudo de caso de um projeto proprietário desenvolvido para a **CRAVIL (Cooperativa Regional Agropecuária Vale do Itajaí)**. O código-fonte original de regras de negócio é confidencial, mas este documento detalha as decisões de engenharia, arquitetura de sistemas e stack utilizada no ecossistema de produção.
+> **📌 Showcase / Case Study Técnico (White-Label Product)**  
+> Este repositório é uma demonstração de arquitetura e estudo de caso do **Social Business**, uma plataforma de comunicação corporativa proprietária desenvolvida e aplicada em produção para a **CRAVIL (Cooperativa Regional Agropecuária Vale do Itajaí)**. O código-fonte original de regras de negócio é confidencial, mas este documento detalha as decisões de engenharia, arquitetura de sistemas e stack utilizada no ecossistema de produção.
 
 ---
 
@@ -20,10 +20,10 @@
 
 ## 🎯 Sobre o Projeto & Impacto de Negócio
 
-O **CravilSocial** é uma plataforma corporativa unificada de rede social e comunicação em tempo real projetada para conectar e engajar colaboradores distribuídos por **mais de 50 filiais operacionais** da cooperativa em Santa Catarina.
+O **Social Business** é uma plataforma corporativa unificada de rede social e comunicação em tempo real projetada para conectar e engajar colaboradores distribuídos por **mais de 50 filiais operacionais** em Santa Catarina.
 
 ### 💡 Problemas Resolvidos:
-* **Descentralização da Comunicação:** Substituição de canais informais e não auditáveis por uma plataforma interna segura.
+* **Descentralização da Comunicação:** Substituição de canais informais e não auditáveis por uma plataforma interna segura e parametrizável.
 * **Comunicação em Tempo Real:** Troca instantânea de mensagens individuais e em grupos setoriais com confirmações de leitura e presença de status.
 * **Transferência de Arquivos Segura:** Gestão e distribuição eficiente de anexos operacionais através de storage em nuvem otimizado.
 
@@ -34,6 +34,8 @@ O **CravilSocial** é uma plataforma corporativa unificada de rede social e comu
 | Interface de Conversas & Grupos | Feed Corporativo & Anexos |
 | :---: | :---: |
 | ![Interface de Chat](CravilSocial_Chat.png) | ![Feed Corporativo](CravilSocial_Feed.png) |
+
+---
 
 ## 🏗️ Arquitetura de Software & Diagrama do Sistema
 
