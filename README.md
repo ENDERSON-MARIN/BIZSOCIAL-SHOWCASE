@@ -33,7 +33,7 @@ O **Social Business** é uma plataforma corporativa unificada de rede social e c
 
 | Interface de Conversas & Grupos | Feed Corporativo & Anexos |
 | :---: | :---: |
-| ![Interface de Chat](CravilSocial_Chat.png) | ![Feed Corporativo](CravilSocial_Feed.png) |
+| ![Interface de Chat](assets/SocialBusiness_Chat.png) | ![Feed Corporativo](assets/SocialBusiness_Feed.png) |
 
 ---
 
