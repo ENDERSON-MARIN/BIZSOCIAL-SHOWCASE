@@ -6,14 +6,14 @@
 ---
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Next.js_16-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" />
-  <img src="https://img.shields.io/badge/React_19-61DAFB?style=for-the-badge&logo=react&logoColor=black" />
+  <img src="https://img.shields.io/badge/Next.js_16.1-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" />
+  <img src="https://img.shields.io/badge/React_19.1-61DAFB?style=for-the-badge&logo=react&logoColor=black" />
   <img src="https://img.shields.io/badge/Node.js_20+-339933?style=for-the-badge&logo=node.js&logoColor=white" />
-  <img src="https://img.shields.io/badge/Express_5-000000?style=for-the-badge&logo=express&logoColor=white" />
+  <img src="https://img.shields.io/badge/Express_5.1-000000?style=for-the-badge&logo=express&logoColor=white" />
   <img src="https://img.shields.io/badge/PostgreSQL_17-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" />
+  <img src="https://img.shields.io/badge/Redis_7-DC382D?style=for-the-badge&logo=redis&logoColor=white" />
   <img src="https://img.shields.io/badge/Socket.io-010101?style=for-the-badge&logo=socketdotio&logoColor=white" />
   <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
-  <img src="https://img.shields.io/badge/Cloudflare_R2-F38020?style=for-the-badge&logo=cloudflare&logoColor=white" />
 </p>
 
 ---
@@ -23,15 +23,15 @@
 O **BizSocial** é uma plataforma corporativa unificada de rede social interna e comunicação em tempo real (ESN — *Enterprise Social Network*), projetada para conectar e engajar colaboradores distribuídos por **mais de 50 filiais operacionais** em Santa Catarina.
 
 ### 💡 Problemas Resolvidos:
-* **Centralização e Governança da Comunicação:** Substituição de canais informais e não auditáveis por uma plataforma corporativa segura, centralizada e parametrizável.
-* **Comunicação Bidirecional em Tempo Real:** Troca instantânea de mensagens 1-on-1 e em grupos setoriais, com confirmação de leitura, indicadores de digitação e gerenciamento de presença online/offline.
-* **Transferência e Storage Seguro de Mídia:** Gestão e distribuição eficiente de anexos operacionais através de infraestrutura de armazenamento em nuvem de alta performance.
+* **Centralização e Governança da Comunicação:** Substituição de canais informais e não auditáveis por uma plataforma corporativa segura com logs de auditoria e relatórios administrativos.
+* **Comunicação Bidirecional em Tempo Real:** Troca instantânea de mensagens 1-on-1 e em grupos setoriais, com confirmação de leitura, notas de voz, anexos e indicador de presença online.
+* **Feed Social Corporativo & Comunicados:** Publicação oficial de comunicados com confirmação de leitura obrigatória, feed de interações, editor rico e automação de posts diários (ex.: aniversariantes).
 
 ---
 
 ## 📸 Demonstração Visual (UI / UX)
 
-| Interface de Chat & Comunicação em Tempo Real | Feed Corporativo & Mídia |
+| Interface de Chat & Comunicação em Tempo Real | Feed Corporativo, Editor Rico & Mídia |
 | :---: | :---: |
 | ![Interface de Chat](assets/BizSocial_Chat.png) | ![Feed Corporativo](assets/BizSocial_Feed.png) |
 
@@ -39,13 +39,13 @@ O **BizSocial** é uma plataforma corporativa unificada de rede social interna e
 
 ## 🏗️ Arquitetura de Software & Diagrama do Sistema
 
-O backend do **BizSocial** foi estruturado sob os princípios da **Arquitetura Hexagonal Modular (Ports & Adapters)**, garantindo desacoplamento total entre as regras de negócio centrais, os meios de transporte (REST / WebSockets) e os adaptadores de infraestrutura (Prisma ORM, S3/Cloudflare R2, JWT).
+O backend do **BizSocial** foi estruturado sob os princípios da **Arquitetura Hexagonal Modular (Ports & Adapters)**, garantindo desacoplamento entre as regras de negócio, meios de transporte (REST / WebSockets) e trabalhadores assíncronos em background.
 
 ```mermaid
 flowchart TD
     subgraph Client ["Frontend App (Next.js 16 + React 19)"]
-        UI[UI Components - shadcn/ui]
-        TQ[TanStack Query - State & Cache]
+        UI[UI Components - shadcn/ui + Tiptap Editor]
+        TQ[TanStack Query v5 - State & Cache]
         WS_C[Socket.IO Client]
     end
 
@@ -60,10 +60,12 @@ flowchart TD
             UC[Use Cases / Business Logic]
             REPO[Repository Interfaces]
         end
+        WORKER[BullMQ Video Worker]
     end
 
-    subgraph Data_Storage ["Persistence & Storage Layer"]
+    subgraph Data_Storage ["Persistence & Queue Layer"]
         PG[(PostgreSQL 17 + Prisma 6)]
+        REDIS[(Redis 7 - Queue & Cache)]
         R2[Cloudflare R2 Storage - S3 API]
     end
 
@@ -73,61 +75,78 @@ flowchart TD
     CF --> HTTP_A & WS_A
     HTTP_A & WS_A --> UC
     UC --> REPO
+    UC -->|Enfileirar Vídeo| REDIS
+    REDIS --> WORKER
     REPO -->|Prisma ORM| PG
-    REPO -->|AWS SDK S3| R2
+    REPO & WORKER -->|AWS SDK S3| R2
 ```
-
 ## 🛠️ Tech Stack Completa
 
 ### Frontend Ecosystem
-- **Core:** Next.js 16 (App Router), React 19, TypeScript 5.8
+- **Core:** Next.js 16.1 (App Router), React 19.1, TypeScript 5.8
 - **Styling & UI:** Tailwind CSS v4, shadcn/ui, Radix UI
+- **Rich Text Editor:** Tiptap v2 (suporte a imagens, vídeos e embeds no feed)
 - **State Management & Data Fetching:** TanStack Query v5 (React Query)
 - **Form & Validation:** React Hook Form v7, Zod v4
 - **Real-time Engine:** Socket.IO Client v4.8
 - **Testing:** Vitest v4
 
 ### Backend & Infrastructure
-- **Runtime & Framework:** Node.js 20+, Express 5.1.0, TypeScript 5.8
+- **Runtime & Framework:** Node.js 20+, Express 5.1.0 (Arquitetura Hexagonal Modular)
 - **Database & ORM:** PostgreSQL 17, Prisma ORM 6.17
+- **Background Jobs & Queues:** BullMQ + Redis 7 (processamento e compressão assíncrona de vídeos)
 - **Real-time Protocol:** Socket.IO v4.8 (WebSockets)
 - **Authentication:** Stateless JWT Auth (jsonwebtoken)
 - **Cloud Storage:** Storage híbrido (Local / Cloudflare R2 via AWS SDK S3 v3)
 - **Containerization & Proxy:** Docker Compose, Nginx, Cloudflare Tunnel
-- **Observability & Docs:** Swagger UI (OpenAPI 3.0), Winster/Morgan Logging
+- **Observability & Docs:** Swagger UI (OpenAPI 3.0), Logs de Auditoria
 
 ---
 
 ## ⚡ Destaques da Engenharia & Decisões Técnicas
 
-1. **Comunicação Bidirecional com Socket.IO**  
-   Integração de servidor WebSockets gerenciado para comunicação em tempo real, suportando envio de mensagens 1-on-1, transmissões em grupos, notificações push instantâneas e verificação de usuários online/offline com reconexão automática e resiliência a falhas de rede.
+1. **Processamento Assíncrono de Vídeos (BullMQ + Redis 7)**  
+   Para evitar gargalos na API principal durante o upload de mídias pesadas no feed social, a compressão e transcodificação de vídeos é delegada para filas de processamento em background orquestradas pelo BullMQ e Redis.
 
-2. **Storage Otimizado com Cloudflare R2 (Zero Egress Fees)**  
-   Para reduzir os custos operacionais com transferência de arquivos e mídia pesada entre as filiais, o sistema utiliza uma camada de abstração com a API S3 da AWS integrada ao Cloudflare R2, eliminando taxas de transferência de dados de saída (egress fees).
+2. **Comunicação Bidirecional de Baixa Latência (Socket.IO)**  
+   Engine de WebSockets para suporte a chats 1-on-1 e grupos setoriais, notas de voz, confirmações de leitura em tempo real e verificação do estado de presença de usuários com reconexão automática.
 
-3. **Pipeline de Backup e Tolerância a Falhas**  
-   Desenvolvimento de um sistema personalizado de scripts de automação em PowerShell integrados a rotinas agendadas no servidor local para backup contínuo do banco de dados PostgreSQL 17, gerenciamento de snapshots e restauração rápida em ambientes isolados.
+3. **Arquitetura Hexagonal & Módulos Isolados**  
+   O backend é totalmente desacoplado em módulos independentes (`auth`, `chat`, `group`, `feed`, `audit`), facilitando a manutenção, criação de rotinas automatizadas (cron de aniversariantes) e escrita de testes unitários e de integração com Vitest.
+
+4. **Storage Otimizado com Custo Egress Zero (Cloudflare R2)**  
+   Abstração da API S3 da AWS com Cloudflare R2 para distribuição de anexos operacionais entre as filiais, eliminando custos de transferência de saída de dados (*egress fees*).
 
 ---
 
-## 📂 Estrutura de Pastas do Projeto Original
+## 📂 Estrutura Modular do Projeto
 
 ```text
 ├── app/
-│   ├── backend/                 # API Node.js + Express
+│   ├── backend/                  # API Node.js + Express (Arquitetura Hexagonal)
 │   │   ├── src/
-│   │   │   ├── app/modules/     # Módulos isolados (auth, chat, group)
-│   │   │   ├── infrastructure/  # Adaptadores (HTTP, WebSocket, Storage, DB)
-│   │   │   └── config/          # Swagger UI & configurações gerais
-│   │   └── prisma/              # Schemas e migrações do PostgreSQL
-│   ├── frontend/                # Next.js 16 App Router
+│   │   │   ├── app/modules/      # Módulos isolados (auth, chat, group, audit, feed)
+│   │   │   ├── infrastructure/   # Adaptadores (HTTP, WebSocket, Storage, DB, BullMQ)
+│   │   │   └── config/           # Swagger UI & configurações gerais
+│   │   └── prisma/               # Schema e migrações PostgreSQL 17
+│   ├── frontend/                 # Next.js 16 App Router + React 19
 │   │   └── src/
-│   │       ├── app/             # Rotas e páginas da aplicação
-│   │       ├── components/      # Componentes modulares reutilizáveis
-│   │       └── hooks/           # Custom hooks & TanStack Query integrations
-│   └── docker-compose.yml       # Orquestração do ambiente
-└── nginx/                       # Configuração de proxy reverso
+│   │       ├── app/              # Rotas e páginas da aplicação
+│   │       ├── _components/      # Componentes modulares (shadcn/ui, Tiptap)
+│   │       └── _hooks/           # Custom hooks & TanStack Query integrations
+│   └── docker-compose.yml        # Orquestração do ambiente (PostgreSQL, Redis)
+└── nginx/                        # Configuração de proxy reverso & SSL
+```
+
+## 🧪 Suíte de Testes
+
+O projeto conta com testes unitários e de integração focados na camada de domínio e casos de uso:
+
+```bash
+# Execução dos testes via Vitest
+pnpm vitest run --reporter=verbose "feed"
+pnpm vitest run --reporter=verbose "message"
+pnpm vitest run --reporter=verbose "group"
 ```
 ## 👨‍💻 Autor & Engenharia de Software
 
@@ -137,3 +156,4 @@ flowchart TD
 - 💼 **LinkedIn:** [linkedin.com/in/enderson-millan](https://www.linkedin.com/in/enderson-millan)
 - ✉️ **E-mail:** [millanendersondev@gmail.com](mailto:millanendersondev@gmail.com)
 - 📺 **YouTube:** [@millanendersondev](https://www.youtube.com/@millanendersondev)
+
