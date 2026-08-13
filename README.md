@@ -1,7 +1,7 @@
-# 💬 Social Business — Enterprise Real-Time Communication & Social Platform
+# 💬 BizSocial — Enterprise Real-Time Communication & Social Platform
 
 > **📌 Showcase / Case Study Técnico (White-Label Product)**  
-> Este repositório é uma demonstração de arquitetura e estudo de caso do **Social Business**, uma plataforma de comunicação corporativa proprietária desenvolvida e aplicada em produção para a **CRAVIL (Cooperativa Regional Agropecuária Vale do Itajaí)**. O código-fonte original de regras de negócio é confidencial, mas este documento detalha as decisões de engenharia, arquitetura de sistemas e stack utilizada no ecossistema de produção.
+> Este repositório é uma demonstração de arquitetura e estudo de caso do **BizSocial**, uma plataforma corporativa de comunicação e rede social interna desenvolvida para ambientes enterprise e aplicada em produção para a **CRAVIL (Cooperativa Regional Agropecuária Vale do Itajaí)**. O código-fonte proprietário com regras de negócio específicas é confidencial, mas este documento detalha as decisões de engenharia, arquitetura de software e a stack de alta performance utilizada no ecossistema de produção.
 
 ---
 
@@ -20,26 +20,26 @@
 
 ## 🎯 Sobre o Projeto & Impacto de Negócio
 
-O **Social Business** é uma plataforma corporativa unificada de rede social e comunicação em tempo real projetada para conectar e engajar colaboradores distribuídos por **mais de 50 filiais operacionais** em Santa Catarina.
+O **BizSocial** é uma plataforma corporativa unificada de rede social interna e comunicação em tempo real (ESN — *Enterprise Social Network*), projetada para conectar e engajar colaboradores distribuídos por **mais de 50 filiais operacionais** em Santa Catarina.
 
 ### 💡 Problemas Resolvidos:
-* **Descentralização da Comunicação:** Substituição de canais informais e não auditáveis por uma plataforma interna segura e parametrizável.
-* **Comunicação em Tempo Real:** Troca instantânea de mensagens individuais e em grupos setoriais com confirmações de leitura e presença de status.
-* **Transferência de Arquivos Segura:** Gestão e distribuição eficiente de anexos operacionais através de storage em nuvem otimizado.
+* **Centralização e Governança da Comunicação:** Substituição de canais informais e não auditáveis por uma plataforma corporativa segura, centralizada e parametrizável.
+* **Comunicação Bidirecional em Tempo Real:** Troca instantânea de mensagens 1-on-1 e em grupos setoriais, com confirmação de leitura, indicadores de digitação e gerenciamento de presença online/offline.
+* **Transferência e Storage Seguro de Mídia:** Gestão e distribuição eficiente de anexos operacionais através de infraestrutura de armazenamento em nuvem de alta performance.
 
 ---
 
 ## 📸 Demonstração Visual (UI / UX)
 
-| Interface de Conversas & Grupos | Feed Corporativo & Anexos |
+| Interface de Chat & Comunicação em Tempo Real | Feed Corporativo & Mídia |
 | :---: | :---: |
-| ![Interface de Chat](assets/SocialBusiness_Chat.png) | ![Feed Corporativo](assets/SocialBusiness_Feed.png) |
+| ![Interface de Chat](assets/BizSocial_Chat.png) | ![Feed Corporativo](assets/BizSocial_Feed.png) |
 
 ---
 
 ## 🏗️ Arquitetura de Software & Diagrama do Sistema
 
-O backend foi estruturado sob os princípios da **Arquitetura Hexagonal Modular (Ports & Adapters)**, garantindo desacoplamento total entre as regras de negócio centrais, os meios de transporte (REST / WebSockets) e os adaptadores de infraestrutura (Prisma ORM, S3/Cloudflare R2, JWT).
+O backend do **BizSocial** foi estruturado sob os princípios da **Arquitetura Hexagonal Modular (Ports & Adapters)**, garantindo desacoplamento total entre as regras de negócio centrais, os meios de transporte (REST / WebSockets) e os adaptadores de infraestrutura (Prisma ORM, S3/Cloudflare R2, JWT).
 
 ```mermaid
 flowchart TD
