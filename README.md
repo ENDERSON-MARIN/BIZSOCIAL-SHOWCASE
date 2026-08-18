@@ -148,12 +148,20 @@ pnpm vitest run --reporter=verbose "feed"
 pnpm vitest run --reporter=verbose "message"
 pnpm vitest run --reporter=verbose "group"
 ```
-## 👨‍💻 Autor & Engenharia de Software
+## 📄 Licença & Direitos Autorais
 
-**Enderson Millan** — *Software Engineer / Full Stack Developer*
+> **Proprietário — Todos os direitos reservados.**  
+> Este repositório é publicado exclusivamente para fins de demonstração de arquitetura de software e portfólio técnico de um sistema desenvolvido sob encomenda para cliente privado.
 
-- 🌐 **Website / Portfólio:** [endersonmillan.com](https://www.endersonmillan.com/)
+- **Propriedade Intelectual:** Todo o código-fonte, estrutura de banco de dados, regras de negócio e marcas registradas são de propriedade privada e confidencial do cliente.
+- **Restrição de Uso:** É estritamente proibida qualquer cópia, distribuição, modificação, reprodução ou exploração comercial deste código, no todo ou em parte, sem autorização prévia e expressa por escrito.
+- **Finalidade:** Exposição de decisões de engenharia, padrões de projeto (*Design Patterns*) e domínio de stack tecnológica para avaliação de senioridade técnica.
+
+## ✉️ Contato & Soluções Corporativas
+
+Interessado em arquitetar ou desenvolver uma plataforma SaaS/Full Stack escalável para a sua empresa? Vamos conversar:
+
+- 🌐 **Portfólio:** [endersonmillan.com](https://endersonmillan.com)
 - 💼 **LinkedIn:** [linkedin.com/in/enderson-millan](https://www.linkedin.com/in/enderson-millan)
 - ✉️ **E-mail:** [millanendersondev@gmail.com](mailto:millanendersondev@gmail.com)
-- 📺 **YouTube:** [@millanendersondev](https://www.youtube.com/@millanendersondev)
 
